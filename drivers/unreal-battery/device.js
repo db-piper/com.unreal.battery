@@ -8,13 +8,6 @@ module.exports = class MyDevice extends Homey.Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
-    await this.setCapabilityOptions("meter_power.charged", {"decimals": 3, "title": {"en": "Charged Energy"}, "units": {"en": "kWh"}});
-    await this.setCapabilityOptions("meter_power.discharged", {"decimals": 3, "title": {"en": "Discharged Energy"}, "units": {"en": "kWh"}});
-    await this.setCapabilityOptions("meter_power.charged_today", {"decimals": 3, "title": {"en": "Charged Today"}, "units": {"en": "kWh"}});
-    await this.setCapabilityOptions("meter_power.discharged_today", {"decimals": 3, "title": {"en": "Discharged Today"}, "units": {"en": "kWh"}});
-    // if (!this.hasCapability('measure_percent.round_trip_efficiency')) {
-    //   this.addCapability('measure_percent.round_trip_efficiency');
-    // }
     this.log('MyDevice has been initialized');
   }
 

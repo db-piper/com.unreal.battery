@@ -36,6 +36,7 @@
       "units": {
         "en": "W"
       },
+      "decimals": 0,
       "getable": true
     },
     "measure_temperature": {
@@ -45,6 +46,7 @@
       "units": {
         "en": "°C"
       },
+      "decimals": 0,
       "getable": true
     },
     "meter_power.charged": {
@@ -104,7 +106,6 @@
       "title": {
         "en": "Round Trip Efficiency"
       },
-      "preventInsights": true,
       "getable": true
     },
     "measure_battery": {
