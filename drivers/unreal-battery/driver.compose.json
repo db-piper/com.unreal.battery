@@ -1,0 +1,134 @@
+{
+  "name": {
+    "en": "Unreal Battery"
+  },
+  "class": "battery",
+  "capabilities": [
+    "measure_power",
+    "measure_temperature",
+    "meter_power.charged",
+    "meter_power.discharged",
+    "meter_power.charged_today",
+    "meter_power.discharged_today",
+    "measure_percent.health",
+    "measure_percent.soc",
+    "measure_percent.round_trip_efficiency",
+    "measure_battery"
+  ],
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "capabilitiesOptions": {
+    "measure_power": {
+      "title": {
+        "en": "Power"
+      },
+      "units": {
+        "en": "W"
+      },
+      "getable": true
+    },
+    "measure_temperature": {
+      "title": {
+        "en": "Temperature"
+      },
+      "units": {
+        "en": "°C"
+      },
+      "getable": true
+    },
+    "meter_power.charged": {
+      "title": {
+        "en": "Charged Energy"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "meter_power.discharged": {
+      "title": {
+        "en": "Discharged Energy"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "meter_power.charged_today": {
+      "title": {
+        "en": "Charged Today"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "meter_power.discharged_today": {
+      "title": {
+        "en": "Discharged Today"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "measure_percent.health": {
+      "title": {
+        "en": "Battery Health"
+      },
+      "getable": true
+    },
+    "measure_percent.soc": {
+      "title": {
+        "en": "Battery SOC"
+      },
+      "preventInsights": true,
+      "getable": true
+    },
+    "measure_percent.round_trip_efficiency": {
+      "title": {
+        "en": "Round Trip Efficiency"
+      },
+      "preventInsights": true,
+      "getable": true
+    },
+    "measure_battery": {
+      "title": {
+        "en": "Battery SOC"
+      },
+      "units": {
+        "en": "%"
+      },
+      "getable": true
+    }
+  },
+  "energy": {
+    "homeBattery": true,
+    "meterPowerImportedCapability": "meter_power.charged",
+    "meterPowerExportedCapability": "meter_power.discharged"
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [],
+  "images": {
+    "small": "/drivers/unreal-battery/assets/images/driver_small.png",
+    "large": "/drivers/unreal-battery/assets/images/driver_large.png",
+    "xlarge": "/drivers/unreal-battery/assets/images/driver_xlarge.png"
+  }
+}

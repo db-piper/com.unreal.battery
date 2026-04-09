@@ -1,0 +1,30 @@
+{
+  "id": "com.unreal.battery",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "brandColor": "#6b93f2",
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Unreal Battery"
+  },
+  "description": {
+    "en": "Emulates a Home Battery device for the Homey Energy Tab"
+  },
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/app_small.png",
+    "large": "/assets/images/app_large.png",
+    "xlarge": "/assets/images/app_xlarge.png"
+  },
+  "author": {
+    "name": "David Piper",
+    "email": "david.piper@normandygite.org.uk"
+  }
+}

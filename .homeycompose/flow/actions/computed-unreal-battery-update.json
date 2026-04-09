@@ -1,0 +1,60 @@
+{
+  "id": "compute_unreal_battery_update",
+  "title": {
+    "en": "Compute updated battery values from power and time"
+  },
+  "titleFormatted": {
+    "en": "Update unreal battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
+  },
+  "hint": {
+    "en": "Update battery capabilities by computed energy from power and time"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=unreal-battery"
+    },
+    {
+      "type": "number",
+      "name": "soh",
+      "placeholder": {
+        "en": "Battery Health %"
+      },
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "number",
+      "name": "soc",
+      "placeholder": {
+        "en": "Charge Level %"
+      },
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "number",
+      "name": "temp",
+      "placeholder": {
+        "en": "Temperature in Celsius"
+      }
+    },
+    {
+      "type": "number",
+      "name": "power",
+      "placeholder": {
+        "en": "Power (positive charging/negative discharging)"
+      }
+    },
+    {
+      "type": "number",
+      "name": "time_base",
+      "placeholder": {
+        "en": "Time base in seconds"
+      }
+    }
+  ]
+}
