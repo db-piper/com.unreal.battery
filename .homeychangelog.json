@@ -1,5 +1,8 @@
 {
   "1.0.0": {
     "en": "First version!"
+  },
+  "1.0.1": {
+    "en": "Generate unique device ID strings so that multiple Homey devices can be created"
   }
 }
