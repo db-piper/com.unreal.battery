@@ -64,7 +64,7 @@ module.exports = class MyDriver extends Homey.Driver {
       {
         name: "Unreal Battery",
         data: {
-          id: "unreal-battery-001" // Unique ID for this instance
+          id: Date.now().toString(36) // Unique ID for this instance
         }
       }
     ];
