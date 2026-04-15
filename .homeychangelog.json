@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "Generate unique device ID strings so that multiple Homey devices can be created"
+  },
+  "1.0.2": {
+    "en": "Updated driver images"
   }
 }
