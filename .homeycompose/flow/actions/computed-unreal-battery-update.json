@@ -4,10 +4,10 @@
     "en": "Compute updated battery values from power and time"
   },
   "titleFormatted": {
-    "en": "Update unreal battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
+    "en": "Update Unreal Battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
   },
   "hint": {
-    "en": "Update battery capabilities by computed energy from power and time"
+    "en": "Update battery capabilities by computing energy from power and time interval"
   },
   "args": [
     {

@@ -1,0 +1,26 @@
+{
+  "id": "compute_power_integration",
+  "title": {
+    "en": "Compute energy by integrating power over time"
+  },
+  "titleFormatted": {
+    "en": "Integrate [[power]] since the last computation to give Energy"
+  },
+  "hint": {
+    "en": "Compute energy by integrating power over time since the last computation."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=power-integrator"
+    },
+    {
+      "type": "number",
+      "name": "power",
+      "placeholder": {
+        "en": "Power in W"
+      }
+    }
+  ]
+}

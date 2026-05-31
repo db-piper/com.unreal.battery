@@ -1,0 +1,77 @@
+{
+  "name": {
+    "en": "Power Integrator"
+  },
+  "class": "sensor",
+  "capabilities": [
+    "measure_power",
+    "meter_power",
+    "meter_power.today",
+    "measure_time",
+    "measure_interval"
+  ],
+  "capabilitiesOptions": {
+    "measure_power": {
+      "title": {
+        "en": "Power"
+      },
+      "units": {
+        "en": "W"
+      },
+      "decimals": 0,
+      "getable": true
+    },
+    "meter_power": {
+      "title": {
+        "en": "Energy"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "meter_power.today": {
+      "title": {
+        "en": "Energy Today"
+      },
+      "units": {
+        "en": "kWh"
+      },
+      "decimals": 3,
+      "getable": true
+    },
+    "measure_time": {
+      "title": {
+        "en": "Epoch Time"
+      },
+      "units": {
+        "en": "ms"
+      },
+      "decimals": 0,
+      "getable": true
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/driver_small.png",
+    "large": "{{driverAssetsPath}}/images/driver_large.png",
+    "xlarge": "{{driverAssetsPath}}/images/driver_xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ]
+}

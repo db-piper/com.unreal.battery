@@ -1,0 +1,15 @@
+{
+  "type": "number",
+  "getable": true,
+  "setable": false,
+  "icon": "/assets/time.svg",
+  "insights": true,
+  "uiComponent": null,
+  "decimals": 0,
+  "title": {
+    "en": "time"
+  },
+  "units": {
+    "en": "ms"
+  }
+}

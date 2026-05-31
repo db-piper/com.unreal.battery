@@ -31,15 +31,41 @@
   "flow": {
     "actions": [
       {
+        "id": "compute_power_integration",
+        "title": {
+          "en": "Compute energy by integrating power over time"
+        },
+        "titleFormatted": {
+          "en": "Integrate [[power]] since the last computation to give Energy"
+        },
+        "hint": {
+          "en": "Compute energy by integrating power over time since the last computation."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=power-integrator"
+          },
+          {
+            "type": "number",
+            "name": "power",
+            "placeholder": {
+              "en": "Power in W"
+            }
+          }
+        ]
+      },
+      {
         "id": "compute_unreal_battery_update",
         "title": {
           "en": "Compute updated battery values from power and time"
         },
         "titleFormatted": {
-          "en": "Update unreal battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
+          "en": "Update Unreal Battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
         },
         "hint": {
-          "en": "Update battery capabilities by computed energy from power and time"
+          "en": "Update battery capabilities by computing energy from power and time interval"
         },
         "args": [
           {
@@ -93,6 +119,84 @@
     ]
   },
   "drivers": [
+    {
+      "name": {
+        "en": "Power Integrator"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "meter_power",
+        "meter_power.today",
+        "measure_time",
+        "measure_interval"
+      ],
+      "capabilitiesOptions": {
+        "measure_power": {
+          "title": {
+            "en": "Power"
+          },
+          "units": {
+            "en": "W"
+          },
+          "decimals": 0,
+          "getable": true
+        },
+        "meter_power": {
+          "title": {
+            "en": "Energy"
+          },
+          "units": {
+            "en": "kWh"
+          },
+          "decimals": 3,
+          "getable": true
+        },
+        "meter_power.today": {
+          "title": {
+            "en": "Energy Today"
+          },
+          "units": {
+            "en": "kWh"
+          },
+          "decimals": 3,
+          "getable": true
+        },
+        "measure_time": {
+          "title": {
+            "en": "Epoch Time"
+          },
+          "units": {
+            "en": "ms"
+          },
+          "decimals": 0,
+          "getable": true
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [],
+      "images": {
+        "small": "/drivers/power-integrator/assets/images/driver_small.png",
+        "large": "/drivers/power-integrator/assets/images/driver_large.png",
+        "xlarge": "/drivers/power-integrator/assets/images/driver_xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "power-integrator"
+    },
     {
       "name": {
         "en": "Unreal Battery"
@@ -231,6 +335,16 @@
     }
   ],
   "capabilities": {
+    "measure_interval": {
+      "type": "string",
+      "title": {
+        "en": "Interval"
+      },
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/interval.svg",
+      "insights": false
+    },
     "measure_percent": {
       "type": "number",
       "getable": true,
@@ -244,6 +358,21 @@
       },
       "units": {
         "en": "%"
+      }
+    },
+    "measure_time": {
+      "type": "number",
+      "getable": true,
+      "setable": false,
+      "icon": "/assets/time.svg",
+      "insights": true,
+      "uiComponent": null,
+      "decimals": 0,
+      "title": {
+        "en": "time"
+      },
+      "units": {
+        "en": "ms"
       }
     }
   }
