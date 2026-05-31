@@ -49,7 +49,8 @@
         "en": "ms"
       },
       "decimals": 0,
-      "getable": true
+      "getable": true,
+      "insights": false
     }
   },
   "platforms": [
