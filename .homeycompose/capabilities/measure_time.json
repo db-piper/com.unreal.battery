@@ -3,7 +3,7 @@
   "getable": true,
   "setable": false,
   "icon": "/assets/time.svg",
-  "insights": true,
+  "insights": false,
   "uiComponent": null,
   "decimals": 0,
   "title": {

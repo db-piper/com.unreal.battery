@@ -27,7 +27,11 @@ module.exports = class MyDevice extends Homey.Device {
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
   async onSettings({ oldSettings, newSettings, changedKeys }) {
-    this.log('MyDevice settings where changed');
+    if (changedKeys.includes("deviceClass")) {
+      await this.setClass(newSettings.deviceClass);
+      this.homey.log(`powerIntegrator:onSettings: New Device Class: ${newSettings.deviceClass}`);
+      return `New device class: ${newSettings.deviceClass}`;
+    }
   }
 
   /**

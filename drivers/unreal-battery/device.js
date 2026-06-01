@@ -8,6 +8,12 @@ module.exports = class MyDevice extends Homey.Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
+    if (!this.hasCapability('measure_time')) {
+      await this.addCapability('measure_time');
+    }
+    if (!this.hasCapability('measure_interval')) {
+      await this.addCapability('measure_interval');
+    }
     this.log('MyDevice has been initialized');
   }
 

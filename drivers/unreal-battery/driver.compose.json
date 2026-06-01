@@ -13,7 +13,9 @@
     "measure_percent.health",
     "measure_percent.soc",
     "measure_percent.round_trip_efficiency",
-    "measure_battery"
+    "measure_battery",
+    "measure_time",
+    "measure_interval"
   ],
   "pair": [
     {
