@@ -7,5 +7,8 @@
   },
   "1.0.2": {
     "en": "Updated driver images"
+  },
+  "1.0.3": {
+    "en": "New Power Integrator device that calculates its own timebase; Enhance the unreal battery to calculate its own timebase; The orignal flow card has been retained for compatibility, but the timebase parameter is ignored."
   }
 }
