@@ -67,7 +67,7 @@
           "en": "Update Unreal Battery with [[soh]], [[soc]], [[temp]], [[power]] every [[time_base]] seconds"
         },
         "hint": {
-          "en": "Update battery capabilities by computing energy from power and time interval"
+          "en": "Update battery capability values by computing energy from power and time interval"
         },
         "args": [
           {
@@ -127,7 +127,7 @@
           "en": "Update Unreal Battery with [[soh]], [[soc]] and [[temp]] because [[power]] has changed."
         },
         "hint": {
-          "en": "Update battery capabilities by computing energy from power when power changes"
+          "en": "Update battery capability values by computing energy from power when power changes"
         },
         "args": [
           {
@@ -727,6 +727,7 @@
         "meter_power.discharged",
         "meter_power.charged_today",
         "meter_power.discharged_today",
+        "meter_power.contribution_today",
         "measure_percent.health",
         "measure_percent.soc",
         "measure_percent.round_trip_efficiency",
@@ -750,7 +751,7 @@
       "capabilitiesOptions": {
         "measure_power": {
           "title": {
-            "en": "Power"
+            "en": "Battery Power"
           },
           "units": {
             "en": "W"
@@ -760,7 +761,7 @@
         },
         "measure_temperature": {
           "title": {
-            "en": "Temperature"
+            "en": "Battery Temperature"
           },
           "units": {
             "en": "°C"
@@ -808,6 +809,16 @@
           "decimals": 3,
           "getable": true
         },
+        "meter_power.contribution_today": {
+          "title": {
+            "en": "Contribution Today"
+          },
+          "units": {
+            "en": "kWh"
+          },
+          "decimals": 3,
+          "getable": true
+        },
         "measure_percent.health": {
           "title": {
             "en": "Battery Health"
@@ -835,6 +846,11 @@
             "en": "%"
           },
           "getable": true
+        },
+        "measure_interval": {
+          "title": {
+            "en": "Update Interval"
+          }
         }
       },
       "energy": {

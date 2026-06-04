@@ -8,39 +8,47 @@ module.exports = class MyDriver extends Homey.Driver {
    * onInit is called when the driver is initialized.
    */
   async onInit() {
+
+    const integrationHandler = this.updatePowerIntegration.bind(this);
     this.homey.flow.getActionCard('compute_power_integration')
-      .registerRunListener(async (args, state) => {
+      .registerRunListener(integrationHandler);
+  }
 
-        // args: device, power
+  /**
+   * Integrate new power reading into energy and energy today
+   * @param {*} args    device, power
+   * @param {*} state 
+   * @returns boolean   true
+   */
+  async updatePowerIntegration(args, state) {
 
-        const integratorDevice = args.device;
-        const homeyInstance = integratorDevice.homey
-        const lastTime = integratorDevice.getCapabilityValue('measure_time');
-        const firstTime = lastTime === null;
-        const thisTime = Date.now();
+    const integratorDevice = args.device;
+    const homeyInstance = integratorDevice.homey;
+    const lastTime = integratorDevice.getCapabilityValue('measure_time');
+    const lastPower = integratorDevice.getCapabilityValue('measure_power') || 0;
+    const firstTime = lastTime === null;
+    const thisTime = Date.now();
 
-        const updates = [
-          integratorDevice.setCapabilityValue('measure_time', thisTime),
-          integratorDevice.setCapabilityValue('measure_power', args.power),
-        ];
+    const updates = [
+      integratorDevice.setCapabilityValue('measure_time', thisTime),
+      integratorDevice.setCapabilityValue('measure_power', args.power),
+    ];
 
-        if (!firstTime) {
-          const lastEnergyTotal = integratorDevice.getCapabilityValue('meter_power') || 0;
-          const lastEnergyToday = integratorDevice.getCapabilityValue('meter_power.today') || 0;
-          const deltaTime = thisTime - lastTime;
-          const deltaEnergy = (args.power / 1000) * (deltaTime / 3600000);
-          const isNewDay = homeyInstance.app.includesMidnight(lastTime, thisTime, homeyInstance.clock.getTimezone());
-          updates.push(
-            integratorDevice.setCapabilityValue('meter_power', deltaEnergy + lastEnergyTotal),
-            integratorDevice.setCapabilityValue('meter_power.today', deltaEnergy + (isNewDay ? 0 : lastEnergyToday)),
-            integratorDevice.setCapabilityValue('measure_interval', homeyInstance.app.formatDuration(deltaTime))
-          )
-        }
+    if (!firstTime) {
+      const lastEnergyTotal = integratorDevice.getCapabilityValue('meter_power') || 0;
+      const lastEnergyToday = integratorDevice.getCapabilityValue('meter_power.today') || 0;
+      const deltaTime = thisTime - lastTime;
+      const deltaEnergy = (lastPower / 1000) * (deltaTime / 3600000);
+      const isNewDay = homeyInstance.app.includesMidnight(lastTime, thisTime, homeyInstance.clock.getTimezone());
+      updates.push(
+        integratorDevice.setCapabilityValue('meter_power', deltaEnergy + lastEnergyTotal),
+        integratorDevice.setCapabilityValue('meter_power.today', deltaEnergy + (isNewDay ? 0 : lastEnergyToday)),
+        integratorDevice.setCapabilityValue('measure_interval', homeyInstance.app.formatDuration(deltaTime))
+      )
+    }
 
-        await Promise.all(updates);
-        return true;
-
-      });
+    await Promise.all(updates);
+    return true;
   }
 
   /**

@@ -7,7 +7,7 @@
     "en": "Update Unreal Battery with [[soh]], [[soc]] and [[temp]] because [[power]] has changed."
   },
   "hint": {
-    "en": "Update battery capabilities by computing energy from power when power changes"
+    "en": "Update battery capability values by computing energy from power when power changes"
   },
   "args": [
     {

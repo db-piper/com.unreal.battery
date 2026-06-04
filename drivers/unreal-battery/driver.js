@@ -25,9 +25,9 @@ module.exports = class MyDriver extends Homey.Driver {
     const batteryDevice = args.device;
     const homeyInstance = batteryDevice.homey;
     const lastTime = batteryDevice.getCapabilityValue('measure_time');
+    const lastPower = batteryDevice.getCapabilityValue('measure_power') || 0;
     const firstTime = lastTime === null;
     const thisTime = Date.now();
-    homeyInstance.log(`unrealBatteryDriver:updateUnrealBattery: soc: ${args.soc}, soh: ${args.soh}, temp: ${args.temp}, power: ${args.power}`);
 
     const updates = [
       batteryDevice.setCapabilityValue('measure_percent.health', args.soh),
@@ -41,8 +41,8 @@ module.exports = class MyDriver extends Homey.Driver {
     if (!firstTime) {
       const deltaTime = thisTime - lastTime;
 
-      const energy = Math.abs((args.power / 1000) * (deltaTime / 3600000));  // (W -> kW) * (ms -> hours) ==> W -> kWh
-      const isCharging = args.power > 0;
+      const energy = Math.abs((lastPower / 1000) * (deltaTime / 3600000));  // (W -> kW) * (ms -> hours) ==> W -> kWh
+      const isCharging = lastPower > 0;
       const energyInTotal = batteryDevice.getCapabilityValue('meter_power.charged') || 0;
       const energyOutTotal = batteryDevice.getCapabilityValue('meter_power.discharged') || 0;
       const energyInToday = batteryDevice.getCapabilityValue('meter_power.charged_today') || 0;
@@ -53,6 +53,7 @@ module.exports = class MyDriver extends Homey.Driver {
       const newTotalEnergyOut = (energyOutTotal + (isCharging ? 0 : energy));
       const newEnergyInToday = isNewDay ? (isCharging ? energy : 0) : (energyInToday + (isCharging ? energy : 0));
       const newEnergyOutToday = isNewDay ? (isCharging ? 0 : energy) : (energyOutToday + (isCharging ? 0 : energy));
+      const contributionToday = newEnergyOutToday - newEnergyInToday;
       let roundTripEfficiency = batteryDevice.getCapabilityValue('measure_percent.round_trip_efficiency') || null;
       if (args.soc >= 98 && newTotalEnergyIn > 0) {
         roundTripEfficiency = 100 * newTotalEnergyOut / newTotalEnergyIn;
@@ -63,6 +64,7 @@ module.exports = class MyDriver extends Homey.Driver {
         batteryDevice.setCapabilityValue('meter_power.discharged', newTotalEnergyOut),
         batteryDevice.setCapabilityValue('meter_power.charged_today', newEnergyInToday),
         batteryDevice.setCapabilityValue('meter_power.discharged_today', newEnergyOutToday),
+        batteryDevice.setCapabilityValue('meter_power.contribution_today', contributionToday),
         batteryDevice.setCapabilityValue('measure_percent.round_trip_efficiency', roundTripEfficiency),
         batteryDevice.setCapabilityValue('measure_interval', homeyInstance.app.formatDuration(deltaTime))
       );

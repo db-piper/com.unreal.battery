@@ -14,7 +14,10 @@ module.exports = class MyDevice extends Homey.Device {
     if (!this.hasCapability('measure_interval')) {
       await this.addCapability('measure_interval');
     }
-    this.log('MyDevice has been initialized');
+    if (!this.hasCapability('meter_power.contribution_today')) {
+      await this.addCapability('meter_power.contribution_today');
+    }
+    this.log('Unreal Battery has been initialized');
   }
 
   /**
