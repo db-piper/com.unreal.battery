@@ -13,5 +13,8 @@
   },
   "1.0.4": {
     "en": "Improve readme.txt to better reflect the change in timebase handling for the unreal battery."
+  },
+  "1.0.5": {
+    "en": "Add references to the forum topic and source code location"
   }
 }
