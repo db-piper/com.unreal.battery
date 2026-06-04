@@ -5,6 +5,8 @@
   "sdk": 3,
   "brandColor": "#6b93f2",
   "runtime": "nodejs",
+  "homeyCommunityTopicId": 153712,
+  "source": "https://github.com/db-piper/com.unreal.battery",
   "platforms": [
     "local"
   ],
