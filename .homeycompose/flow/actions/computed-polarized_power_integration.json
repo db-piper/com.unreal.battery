@@ -1,0 +1,33 @@
+{
+  "id": "compute_polarized_power_integration",
+  "title": {
+    "en": "Compute energy by integrating signed power over time"
+  },
+  "titleFormatted": {
+    "en": "Invert plus/minus [[invertSign]] and Integrate [[power]] since the last computation to give Energy"
+  },
+  "hint": {
+    "en": "Compute energy by integrating signed power over time since the last computation, separating positive and negative power values."
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=polarized-power-integrator"
+    },
+    {
+      "type": "number",
+      "name": "power",
+      "placeholder": {
+        "en": "Power in W"
+      }
+    },
+    {
+      "type": "checkbox",
+      "name": "invertSign",
+      "placeholder": {
+        "en": "Invert Sign of Power Values"
+      }
+    }
+  ]
+}
