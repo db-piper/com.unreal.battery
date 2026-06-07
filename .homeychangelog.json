@@ -22,5 +22,8 @@
   },
   "1.0.7": {
     "en": "Fix bug in polarizing integrator that only reset one daily meter at midnight."
+  },
+  "1.0.8": {
+    "en": "Add setting allowing the polarizing integrator to act as primary energy source/sink in Homey Energy"
   }
 }
