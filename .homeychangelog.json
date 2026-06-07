@@ -19,5 +19,8 @@
   },
   "1.0.6": {
     "en": "Resolve bug in integration calculation with variable time-base; improve app store page content"
+  },
+  "1.0.7": {
+    "en": "Fix bug in polarizing integrator that only reset one daily meter at midnight."
   }
 }
