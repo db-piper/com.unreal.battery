@@ -77,6 +77,12 @@
   },
   "settings": [
     {
+      "id": "isGridEnergy",
+      "type": "checkbox",
+      "value": false,
+      "label": "Represents Grid Use"
+    },
+    {
       "id": "deviceClass",
       "type": "dropdown",
       "value": "other",

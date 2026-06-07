@@ -32,6 +32,22 @@ module.exports = class MyDevice extends Homey.Device {
       this.homey.log(`polarizingPowerIntegrator:onSettings: New Device Class: ${newSettings.deviceClass}`);
       return `New device class: ${newSettings.deviceClass}`;
     }
+
+    if (changedKeys.includes("isGridEnergy")) {
+      if (newSettings.isGridEnergy) {
+        this.setEnergy({
+          cumulativeImportedCapability: 'meter_power.import',
+          cumulativeExportedCapability: 'meter_power.export',
+          cumulative: true
+        });
+      } else {
+        this.setEnergy({
+          cumulativeImportedCapability: null,
+          cumulativeExportedCapability: null,
+          cumulative: false
+        });
+      }
+    }
   }
 
   /**
