@@ -36,18 +36,28 @@ module.exports = class MyDriver extends Homey.Driver {
       integratorDevice.setCapabilityValue('measure_power', thisPower),
     ];
 
-    const energyCapability = lastPower < 0 ? 'meter_power.export' : 'meter_power.import';
-    const energyTodayCapability = lastPower < 0 ? 'meter_power.export_today' : 'meter_power.import_today';
-    const lastEnergyTotal = integratorDevice.getCapabilityValue(energyCapability) || 0;
-    const lastEnergyToday = integratorDevice.getCapabilityValue(energyTodayCapability) || 0;
-
     if (lastTime !== null) {
       const deltaTime = thisTime - lastTime;
       const deltaEnergy = Math.abs((lastPower / 1000) * (deltaTime / 3600000));
       const isNewDay = homeyInstance.app.includesMidnight(lastTime, thisTime, homeyInstance.clock.getTimezone());
+
+      // Calculate baseline totals, resetting them to 0 if midnight was crossed
+      const baseImportToday = isNewDay ? 0 : (integratorDevice.getCapabilityValue('meter_power.import_today') || 0);
+      const baseExportToday = isNewDay ? 0 : (integratorDevice.getCapabilityValue('meter_power.export_today') || 0);
+
+      // Determine active channel for this interval's accumulation
+      const isActiveExport = lastPower < 0;
+      const energyCapability = isActiveExport ? 'meter_power.export' : 'meter_power.import';
+      const lastEnergyTotal = integratorDevice.getCapabilityValue(energyCapability) || 0;
+
       updates.push(
+        // Update lifetime total
         integratorDevice.setCapabilityValue(energyCapability, deltaEnergy + lastEnergyTotal),
-        integratorDevice.setCapabilityValue(energyTodayCapability, deltaEnergy + (isNewDay ? 0 : lastEnergyToday)),
+
+        // Update daily totals (the inactive one gets its clean base baseline, active gets the delta)
+        integratorDevice.setCapabilityValue('meter_power.import_today', baseImportToday + (!isActiveExport ? deltaEnergy : 0)),
+        integratorDevice.setCapabilityValue('meter_power.export_today', baseExportToday + (isActiveExport ? deltaEnergy : 0)),
+
         integratorDevice.setCapabilityValue('measure_interval', homeyInstance.app.formatDuration(deltaTime))
       );
     }
