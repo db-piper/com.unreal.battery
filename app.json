@@ -33,6 +33,32 @@
   "flow": {
     "actions": [
       {
+        "id": "compute_inverted_power_integration",
+        "title": {
+          "en": "Compute energy by integrating negative (exported) power over time"
+        },
+        "titleFormatted": {
+          "en": "Invert sign and integrate [[power]] since the last computation to give Energy"
+        },
+        "hint": {
+          "en": "Compute energy by inverting sign and integrating power over time since the last computation."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=power-integrator"
+          },
+          {
+            "type": "number",
+            "name": "power",
+            "placeholder": {
+              "en": "Power in W"
+            }
+          }
+        ]
+      },
+      {
         "id": "compute_polarized_power_integration",
         "title": {
           "en": "Compute energy by integrating signed power over time"
@@ -832,6 +858,34 @@
         }
       },
       "settings": [
+        {
+          "id": "isGridEnergy",
+          "type": "dropdown",
+          "value": "no",
+          "label": {
+            "en": "Direction of Grid Use if any"
+          },
+          "values": [
+            {
+              "id": "no",
+              "label": {
+                "en": "Neither"
+              }
+            },
+            {
+              "id": "import",
+              "label": {
+                "en": "Import"
+              }
+            },
+            {
+              "id": "export",
+              "label": {
+                "en": "Export"
+              }
+            }
+          ]
+        },
         {
           "id": "deviceClass",
           "type": "dropdown",

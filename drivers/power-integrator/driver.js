@@ -12,6 +12,15 @@ module.exports = class MyDriver extends Homey.Driver {
     const integrationHandler = this.updatePowerIntegration.bind(this);
     this.homey.flow.getActionCard('compute_power_integration')
       .registerRunListener(integrationHandler);
+
+    const inverseIntegrationHandler = this.inverseUpdatePowerIntegration.bind(this);
+    this.homey.flow.getActionCard('compute_inverted_power_integration')
+      .registerRunListener(inverseIntegrationHandler);
+  }
+
+  async inverseUpdatePowerIntegration(args, state) {
+    args.power = -args.power;
+    return await this.updatePowerIntegration(args, state);
   }
 
   /**

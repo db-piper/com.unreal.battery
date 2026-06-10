@@ -8,14 +8,14 @@ module.exports = class MyDevice extends Homey.Device {
    * onInit is called when the device is initialized.
    */
   async onInit() {
-    this.log('MyDevice has been initialized');
+    this.log('Power Integrator has been initialized');
   }
 
   /**
    * onAdded is called when the user adds the device, called just after pairing.
    */
   async onAdded() {
-    this.log('MyDevice has been added');
+    this.log('Power Integrator has been added');
   }
 
   /**
@@ -32,6 +32,31 @@ module.exports = class MyDevice extends Homey.Device {
       this.homey.log(`powerIntegrator:onSettings: New Device Class: ${newSettings.deviceClass}`);
       return `New device class: ${newSettings.deviceClass}`;
     }
+
+    if (changedKeys.includes("isGridEnergy")) {
+      if (newSettings.isGridEnergy === "import") {
+        await this.setEnergy({
+          cumulativeImportedCapability: 'meter_power',
+          cumulativeExportedCapability: null,
+          cumulative: true
+        });
+      } else if (newSettings.isGridEnergy === "export") {
+        await this.setEnergy({
+          cumulativeImportedCapability: null,
+          cumulativeExportedCapability: 'meter_power',
+          cumulative: true
+
+        })
+      } else {
+        await this.setEnergy({
+          cumulativeImportedCapability: null,
+          cumulativeExportedCapability: null,
+          cumulative: false
+        });
+      }
+      this.log(`PowerIntegrator:onSettings - energy: ${JSON.stringify(this.getEnergy())} `);
+    }
+
   }
 
   /**
@@ -40,14 +65,14 @@ module.exports = class MyDevice extends Homey.Device {
    * @param {string} name The new name
    */
   async onRenamed(name) {
-    this.log('MyDevice was renamed');
+    this.log('Power Integrator was renamed');
   }
 
   /**
    * onDeleted is called when the user deleted the device.
    */
   async onDeleted() {
-    this.log('MyDevice has been deleted');
+    this.log('Power Integrator has been deleted');
   }
 
 };

@@ -35,13 +35,13 @@ module.exports = class MyDevice extends Homey.Device {
 
     if (changedKeys.includes("isGridEnergy")) {
       if (newSettings.isGridEnergy) {
-        this.setEnergy({
+        await this.setEnergy({
           cumulativeImportedCapability: 'meter_power.import',
           cumulativeExportedCapability: 'meter_power.export',
           cumulative: true
         });
       } else {
-        this.setEnergy({
+        await this.setEnergy({
           cumulativeImportedCapability: null,
           cumulativeExportedCapability: null,
           cumulative: false

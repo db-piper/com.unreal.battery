@@ -55,6 +55,34 @@
   },
   "settings": [
     {
+      "id": "isGridEnergy",
+      "type": "dropdown",
+      "value": "no",
+      "label": {
+        "en": "Direction of Grid Use if any"
+      },
+      "values": [
+        {
+          "id": "no",
+          "label": {
+            "en": "Neither"
+          }
+        },
+        {
+          "id": "import",
+          "label": {
+            "en": "Import"
+          }
+        },
+        {
+          "id": "export",
+          "label": {
+            "en": "Export"
+          }
+        }
+      ]
+    },
+    {
       "id": "deviceClass",
       "type": "dropdown",
       "value": "other",
